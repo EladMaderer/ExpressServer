@@ -5,7 +5,7 @@ const {users} = require('./mock/users.json');
 
 app.get('/', (req, res) => {
     const {fromIndex, toIndex, searchTerm} = req.query;
-    if(searchTerm.length > 1) {
+    if(searchTerm && searchTerm.length > 1) {
         const regex =  new RegExp(searchTerm.trim(),'i');
         let results = users.filter(({first_name, last_name}) => first_name.match(regex) || last_name.match(regex)).slice(fromIndex, toIndex);
         return res.send(results);
